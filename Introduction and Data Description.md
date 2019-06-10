@@ -86,12 +86,12 @@ Finally, I need to mention about the other major dataset which we shall be using
 | Field name | Description |
 |--|--|
 | CMPLNT_NUM |Randomly generated persistent ID for each complaint  |
-| CMPLNT_FR_DT |  |
-|CMPLNT_FR_TM||
-| CMPLNT_TO_DT |  |
-|  CMPLNT_TO_TM|  |
-|  RPT_DT|--|
-|   KY_CD |  |
+| CMPLNT_FR_DT | Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists) |
+|CMPLNT_FR_TM|Exact time of occurrence for the reported event (or starting time of occurrence, if CMPLNT_TO_TM exists)|
+| CMPLNT_TO_DT | Ending date of occurrence for the reported event, if exact time of occurrence is unknown |
+|  CMPLNT_TO_TM| Ending time of occurrence for the reported event, if exact time of occurrence is unknown |
+|  RPT_DT|Date event was reported to police|
+|   KY_CD | Three digit offense classification code |
 |  OFNS_DESC|  |
 |PD_CD|--|
 | PD_DESC |  |
@@ -106,7 +106,10 @@ Finally, I need to mention about the other major dataset which we shall be using
 | HADEVELOPT |  |
 |X_COORD_CD|  |
 |Y_COORD_CD|--|
-|  |  |
+|Latitude  |  |
+|Longitude|  |
+
+
 
 
 
@@ -121,6 +124,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0NTUxNDE0Nyw3NzUxNTY5OTUsNzc1MT
+eyJoaXN0b3J5IjpbLTMzNzcyNDM1OSw3NzUxNTY5OTUsNzc1MT
 U2OTk1XX0=
 -->
