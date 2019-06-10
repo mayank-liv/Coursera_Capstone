@@ -59,7 +59,7 @@ For this project, we will primarily need 2 major datasets -
 *  Dataset about neighbrhoods in New York City and their top venues
 *  Dataset about the crime records in various locations in New York City
 
-First, we use the link [New York City Neighborhoods Data](https://geo.nyu.edu/catalog/nyu_2451_34572 ) to get data about all the nieghborhoods in New York and their boroughs, in the form of a json file. The link is about the dataset of NYC neighborhoods of the year 2014, so there might be negligibly small inaccuracies in some data. Also, the data we get won't be too clean or organised, and won't really make sense to a layman, as you can see in the picture shown below.
+First, we use the link [New York City Neighborhoods Data](https://geo.nyu.edu/catalog/nyu_2451_34572 ) to get data about all the nieghborhoods in New York and their boroughs, in the form of a json file. The link is about the dataset of NYC neighborhoods of the year 2014, so there might be negligibly small inaccuracies in some data. Also, the data we get won't be too clean or organised, and won't really make sense to a layman, so we will need to
 
 
 
@@ -113,5 +113,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc1MTU2OTk1LDc3NTE1Njk5NV19
+eyJoaXN0b3J5IjpbMTgyMTE1MTQ4NCw3NzUxNTY5OTUsNzc1MT
+U2OTk1XX0=
 -->
