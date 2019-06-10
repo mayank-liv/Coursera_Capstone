@@ -92,14 +92,14 @@ Finally, I need to mention about the other major dataset which we shall be using
 |  CMPLNT_TO_TM| Ending time of occurrence for the reported event, if exact time of occurrence is unknown |
 |  RPT_DT|Date event was reported to police|
 |   KY_CD | Three digit offense classification code |
-|  OFNS_DESC|  |
-|PD_CD|--|
-| PD_DESC |  |
-|  CRM_ATPT_CPTD_CD|  |
-|LAW_CAT_CD|--|
-|  JURIS_DESC|  |
-|BORO_NM|  |
-|ADDR_PCT_CD|--|
+|  OFNS_DESC|  Description of offense corresponding with key code|
+|PD_CD|Three digit internal classification code (more granular than Key Code)|
+| PD_DESC |  Description of internal classification corresponding with PD code (more granular than Offense Description)|
+|  CRM_ATPT_CPTD_CD| Indicator of whether crime was successfully completed or attempted, but failed or was interrupted prematurely |
+|LAW_CAT_CD|Level of offense: felony, misdemeanor, violation|
+|  JURIS_DESC|  Jurisdiction responsible for incident. Either internal, like Police, Transit, and Housing; or external, like Correction, Port Authority, etc.|
+|BORO_NM| The name of the borough in which the incident occurred |
+|ADDR_PCT_CDThe precinct in which the incident occurred|
 | LOC_OF_OCCUR_DESC |  |
 |PREM_TYP_DESC|  |
 |PARKS_NM|--|
@@ -124,6 +124,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzNzcyNDM1OSw3NzUxNTY5OTUsNzc1MT
-U2OTk1XX0=
+eyJoaXN0b3J5IjpbLTExMDA3NjM2NDksNzc1MTU2OTk1LDc3NT
+E1Njk5NV19
 -->
