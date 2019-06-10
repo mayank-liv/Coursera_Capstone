@@ -83,9 +83,18 @@ It gives us another chaotic form of data. However, we scrap the data and finally
 
 Finally, I need to mention about the other major dataset which we shall be using. The dataset about the crimes can be accessed in the website [New York City Crime Data](https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr) Here, a list of all the crimes occuring in New York City in the year 2016, in various neighborhoods, is recorded and stored in immense detail. The dataset has the following data, who's description is shown in the table too. 
 
-| Field name			 | Description |
-|CMPLNT_NUM-|--|
+| Field name | Description |
+|--|--|
+| CMPLNT_NUM |Randomly generated persistent ID for each complaint  |
+| CMPLNT_FR_DT |  |
+|CMPLNT_FR_TM||
+| CMPLNT_TO_DT |  |
 |  |  |
+|--|--|
+|  |  |
+
+
+
 
 We will only use the features that are necessary, as you will see in the implementation of the project.
 
@@ -94,6 +103,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc5Mzk5NzgxLDc3NTE1Njk5NSw3NzUxNT
+eyJoaXN0b3J5IjpbLTg1NzI3NjgyLDc3NTE1Njk5NSw3NzUxNT
 Y5OTVdfQ==
 -->
