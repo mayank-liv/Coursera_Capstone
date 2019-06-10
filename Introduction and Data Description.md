@@ -78,6 +78,8 @@ This data is extracted and converted into a panda dataframe, so that it will be 
 
 Later, we use Foursquare API to extract the top venues in the nighborhood the user wants to search for venues in. The query looks similar to the one mentioned below - 
 
+
+
 <img src="http://drive.google.com/uc?export=view&id=
 1ZITOgWMzC8Bq3odJ7gDUpX5ACzENLmIG">
 
@@ -113,5 +115,5 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc1MTU2OTk1XX0=
+eyJoaXN0b3J5IjpbMTMyMTYzNDcyNyw3NzUxNTY5OTVdfQ==
 -->
