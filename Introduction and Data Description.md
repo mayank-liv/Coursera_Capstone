@@ -83,12 +83,9 @@ It gives us another chaotic form of data. However, we scrap the data and finally
 
 Finally, I need to mention about the other major dataset which we shall be using. The dataset about the crimes can be accessed in the website [New York City Crime Data](https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr) Here, a list of all the crimes occuring in New York City in the year 2016, in various neighborhoods, is recorded and stored in immense detail. The dataset has the following data, who's description is shown in the table too. 
 
-<img src="http://drive.google.com/uc?export=view&id=
-1TQVj2JcWwvOiIeKucNM0d7gzj0BdyvQh">
-<img src="http://drive.google.com/uc?export=view&id=
-1vNfCgwwBcVd3a7EPGkqLAB5xmLLopX2G">
-<img src="http://drive.google.com/uc?export=view&id=
-1etMsaFt40MrRw_HwH4JBu_JVCeyM5hEB">
+| Field name			 | Description |
+|CMPLNT_NUM-|--|
+|  |  |
 
 We will only use the features that are necessary, as you will see in the implementation of the project.
 
@@ -97,6 +94,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NzY0MjA5OCw3NzUxNTY5OTUsNzc1MT
-U2OTk1XX0=
+eyJoaXN0b3J5IjpbNTc5Mzk5NzgxLDc3NTE1Njk5NSw3NzUxNT
+Y5OTVdfQ==
 -->
