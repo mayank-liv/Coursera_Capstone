@@ -59,14 +59,9 @@ For this project, we will primarily need 2 major datasets -
 *  Dataset about neighbrhoods in New York City and their top venues
 *  Dataset about the crime records in various locations in New York City
 
-First, we use the link [New York City Neighborhoods Data](https://geo.nyu.edu/catalog/nyu_2451_34572 ) to get data about all the nieghborhoods in New York and their boroughs, in the form of a json file. The link is about the dataset of NYC neighborhoods of the year 2014, so there might be negligibly small inaccuracies in some data. Also, the data we get won't be too clean or organised, and won't really make sense to a layman, so we will need to
+First, we use the link [New York City Neighborhoods Data](https://geo.nyu.edu/catalog/nyu_2451_34572 ) to get data about all the nieghborhoods in New York and their boroughs, in the form of a json file. The link is about the dataset of NYC neighborhoods of the year 2014, so there might be negligibly small inaccuracies in some data. Also, the data we get won't be too clean or organised, and won't really make sense to a layman, so we will need to clean it. 
 
-
-
-<img src="http://drive.google.com/uc?export=view&id=
-1PA1b7efkgFdQtgyF23Z8pjJikkkXnb9D">
-
-Now, although the data seems chaotic, we extract only the features we want, namely : 
+We extract only the features we want, namely : 
 
 *   Borough - the broroughs mentioned in the New York City dataset
 * Neighborhood - the various neighborhoods in the aforesaid boroughs
@@ -76,20 +71,9 @@ Now, although the data seems chaotic, we extract only the features we want, name
 
 This data is extracted and converted into a panda dataframe, so that it will be easier for us to manipulate this dataframe later on. 
 
-Later, we use Foursquare API to extract the top venues in the nighborhood the user wants to search for venues in. The query looks similar to the one mentioned below - 
+Later, we use Foursquare API to extract the top venues in the nighborhood the user wants to search for venues in. 
 
-<img src="http://drive.google.com/uc?export=view&id=
-1ZITOgWMzC8Bq3odJ7gDUpX5ACzENLmIG">
-
-It gives us another chaotic form of data -
-
-<img src="http://drive.google.com/uc?export=view&id=
-1-4hIk1gPa6HtB4DuyobBUDtmjSDeU7yh
-">
-
-However, we scrap the data and finally extract the dataframe consisting of just 4 columns - 
-
-
+It gives us another chaotic form of data. However, we scrap the data and finally extract the dataframe consisting of just 4 columns - 
 
 *   name - the name of the venue
 *   category - the kind of place it is (restaurant, museum etc)
@@ -113,6 +97,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyMTE1MTQ4NCw3NzUxNTY5OTUsNzc1MT
+eyJoaXN0b3J5IjpbLTM2NzY0MjA5OCw3NzUxNTY5OTUsNzc1MT
 U2OTk1XX0=
 -->
