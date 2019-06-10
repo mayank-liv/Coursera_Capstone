@@ -89,9 +89,16 @@ Finally, I need to mention about the other major dataset which we shall be using
 | CMPLNT_FR_DT |  |
 |CMPLNT_FR_TM||
 | CMPLNT_TO_DT |  |
+|  CMPLNT_TO_TM|  |
+|  RPT_DT|--|
+|   KY_CD |  |
+|  OFNS_DESC|  |
+|PD_CD|--|
+| PD_DESC |  |
+|  CRM_ATPT_CPTD_CD|  |
+|LAW_CAT_CD|--|
 |  |  |
-|--|--|
-|  |  |
+
 
 
 
@@ -103,6 +110,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NzI3NjgyLDc3NTE1Njk5NSw3NzUxNT
-Y5OTVdfQ==
+eyJoaXN0b3J5IjpbLTE4MTc2Njc3MDAsNzc1MTU2OTk1LDc3NT
+E1Njk5NV19
 -->
