@@ -99,15 +99,15 @@ Finally, I need to mention about the other major dataset which we shall be using
 |LAW_CAT_CD|Level of offense: felony, misdemeanor, violation|
 |  JURIS_DESC|  Jurisdiction responsible for incident. Either internal, like Police, Transit, and Housing; or external, like Correction, Port Authority, etc.|
 |BORO_NM| The name of the borough in which the incident occurred |
-|ADDR_PCT_CDThe precinct in which the incident occurred|
-| LOC_OF_OCCUR_DESC |  |
-|PREM_TYP_DESC|  |
-|PARKS_NM|--|
-| HADEVELOPT |  |
-|X_COORD_CD|  |
-|Y_COORD_CD|--|
-|Latitude  |  |
-|Longitude|  |
+|ADDR_PCT_CD|The precinct in which the incident occurred|
+| LOC_OF_OCCUR_DESC | Specific location of occurrence in or around the premises; inside, opposite of, front of, rear of |
+|PREM_TYP_DESC| Specific description of premises; grocery store, residence, street, etc. |
+|PARKS_NM|Name of NYC park, playground or greenspace of occurrence, if applicable (state parks are not included)|
+| HADEVELOPT | Name of NYCHA housing development of occurrence, if applicable |
+|X_COORD_CD|X-coordinate for New York State Plane Coordinate System, Long Island Zone, NAD 83, units feet (FIPS 3104)  |
+|Y_COORD_CD|Y-coordinate for New York State Plane Coordinate System, Long Island Zone, NAD 83, units feet (FIPS 3104)|
+|Latitude  | Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326) |
+|Longitude| Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326) |
 
 
 
@@ -124,6 +124,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDA3NjM2NDksNzc1MTU2OTk1LDc3NT
-E1Njk5NV19
+eyJoaXN0b3J5IjpbOTUyMjU0NzU3LDc3NTE1Njk5NSw3NzUxNT
+Y5OTVdfQ==
 -->
