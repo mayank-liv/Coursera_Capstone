@@ -97,7 +97,18 @@ Finally, I need to mention about the other major dataset which we shall be using
 | PD_DESC |  |
 |  CRM_ATPT_CPTD_CD|  |
 |LAW_CAT_CD|--|
+|  JURIS_DESC|  |
+|BORO_NM|  |
+|ADDR_PCT_CD|--|
+| LOC_OF_OCCUR_DESC |  |
+|PREM_TYP_DESC|  |
+|PARKS_NM|--|
+| HADEVELOPT |  |
+|X_COORD_CD|  |
+|Y_COORD_CD|--|
 |  |  |
+
+
 
 
 
@@ -110,6 +121,6 @@ We will only use the features that are necessary, as you will see in the impleme
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTc2Njc3MDAsNzc1MTU2OTk1LDc3NT
-E1Njk5NV19
+eyJoaXN0b3J5IjpbMTk0NTUxNDE0Nyw3NzUxNTY5OTUsNzc1MT
+U2OTk1XX0=
 -->
