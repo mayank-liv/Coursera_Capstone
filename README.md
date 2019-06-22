@@ -45,7 +45,7 @@ As I've explained in excruciating detail earlier, this project aims to help trav
 
 For this project, we'll be using two major open datasets.
 
-### * New York City Crime Record for 2016-17 :
+### New York City Crime Record for 2016-17 :
 
 This dataset is available at the link: [New York City 2016-17 crime records](https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr) and includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters of 2017. This dataset is mostly used for visualisation with Folium Maps, as it has lesser number of data points.
 
@@ -62,7 +62,7 @@ The description of the columns of this dataset we'll primarily be using, is give
 We further use various data cleaning techniques to split columns like CMPLNT_FR_TM into its components, like hours etc, to further help with our data modelling and visualisation.
 
 
-### * New York City Crime Historic Crime Record since 2006 - 
+### New York City Crime Historic Crime Record since 2006 - 
 
 This dataset is available in the link: [New York Historic Crime Record Since 2006](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrests-Data-Historic-/8h9b-rp9u/data) and contains a list of every arrest in NYC going back to 2006 through the end of the previous calendar year.
 
@@ -83,7 +83,7 @@ We further use various data cleaning techniques to split columns like CMPLNT_FR_
 
 For the rest of the data we will need, we use Foursquare API. The other datasets we extract using Foursquare are:
 
-### * Top 30 venues in New York City - 
+### Top 30 venues in New York City - 
 
 We first use Foursquare API to explore New York City for its top 30 venues, which leads us to the following link: [Top 30 venues](https://foursquare.com/explore?mode=url&ne=40.822383%2C-73.841&q=Top%20Picks&sw=40.666056%2C-74.129047).
 
@@ -102,7 +102,7 @@ Next, we use BeautifulSoup to scrap off data from this link. The data we scrap i
 |latitude|Latitude of venue's location|
 |longitude|Longitude of venue's location|
 
-### * Top restaurants within a certain distance of these Top Venues - 
+### Top restaurants within a certain distance of these Top Venues - 
 
 We further use Foursquare API and find out data about the top restaurants that are around our top venues in NYC, and then scrap it and store it in a dataframe using BeautifulSoup. The columns in the dataframe are:
 
@@ -127,6 +127,37 @@ We further use Foursquare API and find out data about the top restaurants that a
 
 ## 3. Exploratory Data Analysis and Visualisation-
 
-### * A look at which months are the safest to visit NYC in -
+### First, we take a look at what the top 10 crimes that people have been arrested for in NYC over the last 10 years, are -
+
+![Top 10 crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(71).png)
+
+This gives us the user an idea about what crimes to expect while at NYC, and to prepare for it accordingly.
+
+
+### A look at which months are the safest to visit NYC in -
 
 We group the crime data of NYC since 2006, according to the months the crime occured in, and then have a look at a bar-diagram to have a better understanding of the data.
+
+![Month-wise comparison of crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Fig1%20(1).png)
+
+Clearly, we can see that months 11 and 12 (i.e. November and December respectively) are the ones with the lowest number of total crimes since 2006. Hence, we can conclude that that's the safest time of the month for a person to visit NYC. The low number of crimes might be because of the bitterly cold NYC winters, which make people prefer staying indoors. Still, based on this visualisation, we can recommend December as the safest month to visit NYC.
+
+
+### A look at which days are the safest to visit NYC in - 
+
+We group the crime data of NYC since 2006, according to the months the crime occured in, and then have a look at a bar-diagram to have a better understanding of the data.
+
+![Day-wise comparison of crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Fig2%20(1).png)
+
+Clearly, we can see that days 1 and 7 (i.e. Monday and Sunday, respectively) have witnessed the least number of crimes since 2006. Hence, the user is recommended to visit NYC during these days. Days 3 and 4 (i.e Wednesday and Thursday respectively) witness the most number of crimes, probably because these are peak weekdays. 
+
+
+### A look at which hours are the safest to go out in NYC, in -
+
+For this, we group the crime data of NYC in 2016-17, as the hour parameter is not present in the crime dataset of NYC since 2006. Since we are plotting the number of crimes for just 1 year, the number of crimes that are shown is drastically low.
+
+![Hour-wise comparison of crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Fig3.png)
+
+We can see peak-criminal activity at 0 hours, after which the numbers of crimes drastically falls down. Hence its highly recommended for a person to stay indoor and cautious at this time. The early morning hours seem to be the safest, so if someone wants to explore the neighbourhood, that would be the time to do it. 
+
+
