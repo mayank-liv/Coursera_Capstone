@@ -179,16 +179,207 @@ From this visualisation, we can clearly see the dip in the number of crimes towa
 For getting the top 30 venues in NYC, the following bit of code was used. Data scrapping required me to inspect the site already mentioned before, to find the required address of various elements that together form a part of our dataset.
 
 
+'''   
+  
+        #these are the columns that we'll use to store data about the top venues
+        venue_columns = ['id', 
+                 'score', 
+                 'category', 
+                 'name', 
+                 'address',
+                 'postalcode',
+                 'city',
+                 'href', 
+                 'latitude', 
+                 'longitude']
+
+
+    df_top_venues = pd.DataFrame(columns=venue_columns)
+
+
+
+   
+    for venuex in top_venues:
+    
+    # Extract the available attributes
+    venue_name = venuex.find(target="_blank").get_text()
+    venue_score = venuex.find(class_="venueScore positive").get_text()
+    venue_cat = venuex.find(class_="categoryName").get_text()
+    venue_href = venuex.find(class_="venueName").h2.a['href']
+    venue_id = venue_href.split('/')[-1]
+        
+    # Contruct the FourSquare venue API URL
+    url = 'https://api.foursquare.com/v2/venues/{}?client_id={}&client_secret={}&v={}'.format(venue_id,
+                                                                                              client_id,
+                                                                                              client_secret,
+                                                                                              version)
+    
+    # Request the venue data
+    result = requests.get(url).json()
+        
+    # Get the properly formatted address and the latitude and longitude
+    try:
+      venue_address = result['response']['venue']['location']['address']
+      venue_postalcode = result['response']['venue']['location']['postalCode']
+      venue_city = result['response']['venue']['location']['city']
+      venue_latitude = result['response']['venue']['location']['lat']
+      venue_longitude = result['response']['venue']['location']['lng']
+    
+    except:
+      continue
+      
+      
+    # Add the venue to the top venues dataframe
+    df_top_venues = df_top_venues.append({'id': venue_id,
+                                          'score': venue_score,
+                                          'category': venue_cat,
+                                          'name': venue_name,
+                                          'address': venue_address,
+                                          'postalcode': venue_postalcode,
+                                          'city': venue_city,
+                                          'href': venue_href,
+                                          'latitude': venue_latitude,
+                                          'longitude': venue_longitude},ignore_index=True)
+
 '''
 
-top=requests.get("https://foursquare.com/explore?mode=url&ne=40.822383%2C-73.841&q=Top%20Picks&sw=40.666056%2C-74.129047")
 
-soup = BeautifulSoup(top.content, 'html.parser')
+### Data scrapping from Foursquare for top restaurants around our top venues -
 
-top_venues = soup.find_all('div', class_='venueDetails')
+For getting the top restaurants around the top venues in NYC, the following bit of code was used. Data scrapping required me to inspect the site already mentioned before, to find the required address of various elements that together form a part of our dataset. 
 
 '''
 
+    # The column names for the restaurants dataframe
+    restaurants_columns = ['id',
+                       'score', 
+                       'category', 
+                       'categoryID', 
+                       'name', 
+                       'address',
+                       'postalcode',
+                       'city',
+                       'latitude',
+                       'longitude', 
+                       'venue_name', 
+                       'venue_latitude',
+                       'venue_longitude']
+    # Create the empty top venues dataframe
+    df_restaurant = pd.DataFrame(columns=restaurants_columns)
+    
+    # Create a list of all the top venue latitude and longitude
+    top_venue_lngs = df_top_venues['longitude'].values
 
-version='20180604'
+    # Create a list of all the top venue names
+    top_venue_names = df_top_venues['name'].values
+  
+    # Iterate over each of the top venues
+    # The venue name, latitude and longitude are passed to the loop
+    top_venue_lats = df_top_venues['latitude'].values
+    
+    for ven_name, ven_lat, ven_long in zip(top_venue_names, top_venue_lats, top_venue_lngs):
+    
+    # Configure additional Search parameters
+    # This is the FourSquare Category Id for all food venues
+    categoryId = '4d4b7105d754a06374d81259'
+    radius = 500
+    limit = 50
+    
+    # Contruct the FourSquare search API URL
+    url = 'https://api.foursquare.com/v2/venues/search?client_id={}&client_secret={}&ll={},{}&v={}&categoryId={}&radius={}&limit={}'.format(
+        cid,
+        csecret,
+        ven_lat,
+        ven_long,
+        '20180604',
+        categoryId,
+        radius,
+        limit)
+    
+    # Make the search request
+    results = requests.get(url).json()
+    
+    
+    
+    # Want a good selection of Restaurents
+    # If less than 10 are returned ignore
+    if len(results['response']['venues']) < 10:
+        continue
+        
+    # Populate the new dataframe with the list of restaurants
+    # Get the values for each Restaurant from the JSON
+    for restaurant in results['response']['venues']:
+      try:
+        # Sometimes the Venue JSON is missing data. If so ignore and continue
+        
+        # Get location details
+        rest_id = restaurant['id']
+        rest_category = restaurant['categories'][0]['pluralName']
+        rest_categoryID = restaurant['categories'][0]['id']
+        rest_name = restaurant['name']
+        rest_address = restaurant['location']['address']
+        rest_postalcode = restaurant['location']['postalCode']
+        rest_city = restaurant['location']['city']
+        rest_latitude = restaurant['location']['lat']
+        rest_longitude = restaurant['location']['lng']
+        
+        rest_url = 'https://api.foursquare.com/v2/venues/{}?client_id={}&client_secret={}&v={}'.format(
+                rest_id, 
+                cid,
+                csecret,
+                '20180604')
+        resultf = requests.get(rest_url).json()
+        rest_score = resultf['response']['venue']['rating']
+        # Add the restaurant details to the datafram
+        df_restaurant = df_restaurant.append({'id': rest_id,
+                                           'score': rest_score,
+                                            'category': rest_category,
+                                            'categoryID': rest_categoryID,
+                                            'postalcode': rest_postalcode,
+                                            'name': rest_name,
+                                            'address': rest_address,
+                                            'city': rest_city,
+                                            'latitude': rest_latitude,
+                                            'longitude': rest_longitude,
+                                            'venue_name': ven_name,
+                                            'venue_latitude': ven_lat,
+                                            'venue_longitude': ven_long}, ignore_index=True)
+            
+        # If there are any issue with a restaurant ignore and continue
+      except:
+            continue
+'''
 
+The above codes along with the dataframe it stored the data in, is available on my Github repository.
+
+
+### Map 1 - Top venues along with the locations of the crimes of 2016-17
+
+[Map 1](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(57).png)
+
+From this map, we can see the distribution of the top venues, as well as the location of the crimes of 2016-17. Clearly, the north of the city seems more unsafe, because of the larger number of crimes there. Also, since most of the top-venues are in South and Central New York, that is the location a user should prefer staying in and exploring.
+
+### Map 2 - Heat Map of crimes of 2016-17 
+
+[Map 2](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(59).png)
+
+Seeing this map, we can conclude that there are primarily 2 major hotspots for crimes in NYC, one in the souther fringes of the city, and one in the northern part. The northern part seems to be having a larger number of crimes. So, later on we will build on this and try to cluster these crime into 3 different clusters, based on their location.
+
+### Map 3 - Recommended restaurants around Central Park, along with heat map of nearby crimes
+
+[Map 3](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(64).png)
+
+We assume that seeing the earlier maps, the user chooses to visit a safe venue like Central Park, and later searches for the top restaurants around that venue. The map shows the top venue (Central Park) marked with a red star, along with a heat map based on the location of crimes that have occured here since 2006. Clearly, barely a few crimes have occured here, so its a very safe place to visit. Moreover, the location of crimes around Central Park seem to be focused around 3 hotspots, so those are the places a person needs to be most careful around. Also, the blue icons marked as thumbs show the top 10 restaurants, around Central Park. When we click on these icons, the restaurant's name, category as well as overall score pops up, which helps the user choose which restaurant he/she wants to visit. Since most of the top restaurants are towards the east of Central Park, that's where a user is recommended to go.
+
+
+### Map 4 - Recommended restaurants around Hudson River Park, along with heat map of nearby crimes
+
+[Map 4](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(67).png)
+
+Now, Hudson River Park is located at a relatively unsafe location, when compared to Central Park, which is why the heatmap is so dense. Since folium can print maps only when the numbers of makrers/ data points is less than 1000, we have shown only the crimes that have occured withing 460 metres of Hudson River Park. If the user wishes to visit this venue, he is recommended to be extra careful, and to spend as less time here as possible. We can also see the top restaurants around this venue, along with their category and ratings.
+
+### Map 5 - Clustering of the crimes of 2016-17, on the basis of location
+
+[Map 5](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(74).png)
+
+As we had seen in Map 2, the crimes of New York City in 2016-17 mostly occur around 2 hotspots. So, we used K-Means clustering to cluster the crimes into 3 separate clusters, based on their location. Clearly, the 2 clusters on the North seem very close together and have the greatest numbers of crimes and so are most dense, while the southern cluster is far of from them. There is clearly an area on the map devoid of crimes, which means that central NYC is the safest place to be.
