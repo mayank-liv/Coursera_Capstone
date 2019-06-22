@@ -355,31 +355,114 @@ The above codes along with the dataframe it stored the data in, is available on 
 
 ### Map 1 - Top venues along with the locations of the crimes of 2016-17
 
-[Map 1](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(57).png)
+![Map 1](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(57).png)
 
 From this map, we can see the distribution of the top venues, as well as the location of the crimes of 2016-17. Clearly, the north of the city seems more unsafe, because of the larger number of crimes there. Also, since most of the top-venues are in South and Central New York, that is the location a user should prefer staying in and exploring.
 
 ### Map 2 - Heat Map of crimes of 2016-17 
 
-[Map 2](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(59).png)
+![Map 2](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(59).png)
 
 Seeing this map, we can conclude that there are primarily 2 major hotspots for crimes in NYC, one in the souther fringes of the city, and one in the northern part. The northern part seems to be having a larger number of crimes. So, later on we will build on this and try to cluster these crime into 3 different clusters, based on their location.
 
 ### Map 3 - Recommended restaurants around Central Park, along with heat map of nearby crimes
 
-[Map 3](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(64).png)
+![Map 3](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(64).png)
 
 We assume that seeing the earlier maps, the user chooses to visit a safe venue like Central Park, and later searches for the top restaurants around that venue. The map shows the top venue (Central Park) marked with a red star, along with a heat map based on the location of crimes that have occured here since 2006. Clearly, barely a few crimes have occured here, so its a very safe place to visit. Moreover, the location of crimes around Central Park seem to be focused around 3 hotspots, so those are the places a person needs to be most careful around. Also, the blue icons marked as thumbs show the top 10 restaurants, around Central Park. When we click on these icons, the restaurant's name, category as well as overall score pops up, which helps the user choose which restaurant he/she wants to visit. Since most of the top restaurants are towards the east of Central Park, that's where a user is recommended to go.
 
 
 ### Map 4 - Recommended restaurants around Hudson River Park, along with heat map of nearby crimes
 
-[Map 4](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(67).png)
+![Map 4](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(67).png)
 
 Now, Hudson River Park is located at a relatively unsafe location, when compared to Central Park, which is why the heatmap is so dense. Since folium can print maps only when the numbers of makrers/ data points is less than 1000, we have shown only the crimes that have occured withing 460 metres of Hudson River Park. If the user wishes to visit this venue, he is recommended to be extra careful, and to spend as less time here as possible. We can also see the top restaurants around this venue, along with their category and ratings.
 
 ### Map 5 - Clustering of the crimes of 2016-17, on the basis of location
 
-[Map 5](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(74).png)
+![Map 5](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Screenshot%20(74).png)
 
 As we had seen in Map 2, the crimes of New York City in 2016-17 mostly occur around 2 hotspots. So, we used K-Means clustering to cluster the crimes into 3 separate clusters, based on their location. Clearly, the 2 clusters on the North seem very close together and have the greatest numbers of crimes and so are most dense, while the southern cluster is far of from them. There is clearly an area on the map devoid of crimes, which means that central NYC is the safest place to be.
+
+
+### K-Means clustering - 
+
+Clearly, the dataset we had procured had already classified the crimes into various categories, based on the type of offense, the type of crime, the location of it etc. Hence, there was a limited scope for us to further classify the data into newer categories. However, from Map 2, we saw that seemed to be 2 sepearate clusters of crimes in the year 2016-17. So that I wasn't being too rigid on our observations, I decided to apply K-means clustering with 3 different clusters, so that 3 clusters based on location could be formed. From Map 5, we can say that one of the clusters is in south NYC, one is in North-and-central NYC, and one cluster is in extreme north NYC, with very few crimes reported in NYC at all. Clearly, north NYC is highly unsafe, and isn't recommended to be visited for someone who doesn't know the place or the people well.
+
+The code we use for the K-means clustering algorithm, is given below.
+
+'''   
+
+    # set number of clusters
+    kclusters = 3
+
+    # run k-means clustering
+    kmeans = KMeans(n_clusters=kclusters, random_state=0).fit(dfaq)
+
+    # check cluster labels generated for each row in the dataframe
+    kmeans.labels_ 
+
+    # add clustering labels
+    df.insert(0, 'Cluster Labels', kmeans.labels_)
+'''
+
+
+
+## 4. Results - 
+
+From the visualisation of data we have done before, we can come to the following conclusions.
+
+* The safest location to stay in NYC, is Central NYC, in the region around Central Park.
+
+* The safest months to visit NYC are November and December.
+
+* The safest days of the week to come to NYC are Saturday, Sunday and Monday, based on the crime statistics since 2006.
+
+* 00 hours. and the hour after it, is by far the unsafest time in NYC, so its recommended to stay indoors if one can. 
+
+* The top 10 venues to visit in NYC, are : i) Central Park
+                                          ii) Brooklyn Bridge Park
+                                          iii) Minskoff Theatre
+                                          iv) Long Meadow
+                                          v) Hudson River Greenway Running Path
+                                          vi) Gantry Plaza State Park
+                                          vii) Brooklyn Heights Promenade
+                                          viii) Bryant Park
+                                          ix) Metropolitan Museum of Art
+                                          x) Hudson River Park
+ 
+ These recommendations are purely on the basis of current trends, and are subject to change with time. The other top venues can be seen in the notebook that I have uploaded.
+ 
+ * The venues in central NYC, like Central Park, Bryant Park, Metropolitan Museum of Art etc are the safest to visit.
+ 
+ * The top 3 crimes in NYC are : i) Possession of Marijuana
+                                 ii) Assault
+                                 iii) Theft of Services
+Hence, a person who is new to the city is advised to be aware of these crimes.                                 
+ 
+ * Crimes in NYC can basically be segregated into 3 clusters, based on location. Two clusters are very close by and have maximum number of crimes, in north NYC (with a few exceptions from central NYC too), while a relatively smaller number of crimes are spread over a cluster in southern NYC.
+ 
+ * The top 10 recommended restaurants around the top venue a user wishes to explore, can be seen using the notebook. For now, in Map 3 and Map 4, I have shown a couple of such maps, which will help a user choose a safe restaurant to visit.
+
+
+
+
+## 5. Discussion - 
+
+The dataframe we have used here for the K-Means clustering of crimes, is the one containing crime records for 2016-17. Since this dataframe has just 26 records, I couldn't use any features other than the latitude and longitude coordinates, to train the K-means clustering model.
+
+Ideally, I would've preferred using the dataframe having crime records of NYC since 2006, but unfortunately, Folium maps has a flaw wherein if we insert more than 1000 markers/data points in a map, the map doesn't get printed at all. And so even if we could train the model and classify the crimes into various clusters based on not only the latitude and longitude but also on the basis of the crime, the type of offence etc, we wouldn't be able to visualise it on the map as we have 4,798,339 data points in the dataset. Hence, we needed to settle with modelling using simple features (latitude and longitude) on the 2016-17 crime records dataset, so that the clustering could be done properly without too many anomalies.
+
+
+
+
+
+## 6. Future Improvements on this -
+
+I'll hope to find libraries other than folium that support the visualisation of datasets that are as large as the dataset of crimes since 2006, that we had used for a few of our visualisations. Moreover, just like in Google Maps once gets an estimate of the travel time between two points based on the history of the traffic trend on the route, I would like to integrate a more refined version of this above project on a similar platform to Google Maps, so that when one searches for places to visit in a city, he also gets to see the trends of the crimes around it, as well as the times that the place is safest to be visited.
+
+
+
+
+
+
