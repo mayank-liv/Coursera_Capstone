@@ -160,4 +160,87 @@ For this, we group the crime data of NYC in 2016-17, as the hour parameter is no
 
 We can see peak-criminal activity at 0 hours, after which the numbers of crimes drastically falls down. Hence its highly recommended for a person to stay indoor and cautious at this time. The early morning hours seem to be the safest, so if someone wants to explore the neighbourhood, that would be the time to do it. 
 
+### A look at the month-wise comparison of the top 3 crimes - 
 
+![Month-wise top 3 crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Fig4%20(1).png)
+
+From this visualisation, we can clearly see a gradual dip in the number of crimes from month 10 (October) for around 3 months, so that marks the beginning of the safest months.
+
+### A look at the day-wise comparison of the top 3 crimes -
+
+![Day-wise top 3 crimes](https://github.com/mayank-liv/Coursera_Capstone/blob/master/Capstone/Fig5.png)
+
+From this visualisation, we can clearly see the dip in the number of crimes towards day 5 (Friday) that last till day 1 (Monday). Hence, this is the best time of the week to visit NYC.
+
+
+
+### Data Scrapping from Foursquare for top 30 Venues-
+
+For getting the top 30 venues in NYC, the following bit of code was used. Data scrapping required me to inspect the site already mentioned before, to find the required address of various elements that together form a part of our dataset.
+
+'''
+
+top=requests.get("https://foursquare.com/explore?mode=url&ne=40.822383%2C-73.841&q=Top%20Picks&sw=40.666056%2C-74.129047")
+soup = BeautifulSoup(top.content, 'html.parser')
+top_venues = soup.find_all('div', class_='venueDetails')
+version='20180604'
+
+#these are the columns that we'll use to store data about the top venues
+venue_columns = ['id', 
+                 'score', 
+                 'category', 
+                 'name', 
+                 'address',
+                 'postalcode',
+                 'city',
+                 'href', 
+                 'latitude', 
+                 'longitude']
+
+
+df_top_venues = pd.DataFrame(columns=venue_columns)
+
+
+
+for venuex in top_venues:
+    
+    # Extract the available attributes
+    venue_name = venuex.find(target="_blank").get_text()
+    venue_score = venuex.find(class_="venueScore positive").get_text()
+    venue_cat = venuex.find(class_="categoryName").get_text()
+    venue_href = venuex.find(class_="venueName").h2.a['href']
+    venue_id = venue_href.split('/')[-1]
+        
+    # Contruct the FourSquare venue API URL
+    url = 'https://api.foursquare.com/v2/venues/{}?client_id={}&client_secret={}&v={}'.format(venue_id,
+                                                                                              client_id,
+                                                                                              client_secret,
+                                                                                              version)
+    
+    # Request the venue data
+    result = requests.get(url).json()
+        
+    # Get the properly formatted address and the latitude and longitude
+    try:
+      venue_address = result['response']['venue']['location']['address']
+      venue_postalcode = result['response']['venue']['location']['postalCode']
+      venue_city = result['response']['venue']['location']['city']
+      venue_latitude = result['response']['venue']['location']['lat']
+      venue_longitude = result['response']['venue']['location']['lng']
+    
+    except:
+      continue
+      
+      
+    # Add the venue to the top venues dataframe
+    df_top_venues = df_top_venues.append({'id': venue_id,
+                                          'score': venue_score,
+                                          'category': venue_cat,
+                                          'name': venue_name,
+                                          'address': venue_address,
+                                          'postalcode': venue_postalcode,
+                                          'city': venue_city,
+                                          'href': venue_href,
+                                          'latitude': venue_latitude,
+                                          'longitude': venue_longitude},ignore_index=True)
+'''                                          
