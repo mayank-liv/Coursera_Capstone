@@ -466,3 +466,4 @@ I'll hope to find libraries other than folium that support the visualisation of 
 
 
 
+(Idea inspired by https://github.com/davidcolton/Coursera_Capstone )
